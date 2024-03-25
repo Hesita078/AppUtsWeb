@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Order Form</h1>
+    <table id="order-table">
+        <tr>
+            <th>Nama Menu</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr>
+            <td>Cappucino</td>
+            <td>Rp 15.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Green Tea Latte</td>
+            <td>Rp 18.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Choco Vanilla</td>
+            <td>Rp 15.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Lychee Yakult</td>
+            <td>Rp 15.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Air Mineral</td>
+            <td>Rp 5.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Nasi Ayam Katsu</td>
+            <td>Rp 15.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Nasi Ayam Blackpepper</td>
+            <td>Rp 18.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Nasi Ayam Asam Manis</td>
+            <td>Rp 15.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td>Mie Carbonara</td>
+            <td>Rp 13.000</td>
+            <td><input type="number" value="0" class="quantity"></td>
+            <td class="subtotal">Rp 0</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="total">Total</td>
+            <td id="total">Rp 0</td>
+        </tr>
+    </table>
+    <script>
+        const quantityInputs = document.querySelectorAll('.quantity');
+        const subtotals = document.querySelectorAll('.subtotal');
+        const total = document.getElementById('total');
+        
+        quantityInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                const price = parseInt(this.parentElement.previousElementSibling.textContent.split('Rp ')[1].replace('.', ''));
+                const quantity = parseInt(this.value);
+                const subtotalElement = this.parentElement.nextElementSibling;
+                const subtotal = price * quantity;
+                subtotalElement.textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+                updateTotal();
+            });
+        });
+        
+        function updateTotal() {
+            let sum = 0;
+            subtotals.forEach(function(element) {
+                sum += parseInt(element.textContent.split('Rp ')[1].replace('.', ''));
+            });
+            total.textContent = `Rp ${sum.toLocaleString('id-ID')}`;
+        }
+    </script>
+</body>
+</html>
